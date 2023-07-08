@@ -18,6 +18,7 @@ jobs:
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: us-east-1
           role-session-name: dev
+          role-skip-session-tagging: true
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
 
       - uses: hashicorp/setup-terraform@v2
