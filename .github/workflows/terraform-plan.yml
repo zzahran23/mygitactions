@@ -2,7 +2,8 @@ name: Terraform Plan
 run-name: Terraform Plan 🚀
 on: [push]
 env:
-  AWS_REGION : "us-east-1"
+  AWS_REGION: "us-east-1"
+  AWS_PROFILE: "dev"
 permissions:
     id-token: write
     contents: read
