@@ -40,5 +40,4 @@ jobs:
       - run: terraform init -upgrade
       - id: plan
         run: |
-          terraform force-unlock aaf10a34-fb28-cfb8-c2ef-5a281589f5d0
-          terraform apply -no-color -auto-approve=true
+          terraform apply -no-color -auto-approve=true -lock=false
