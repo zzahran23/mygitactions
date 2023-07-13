@@ -40,4 +40,4 @@ jobs:
       - run: terraform init -upgrade
       - id: plan
         run: |
-          terraform plan -no-color -auto-approve=true -lock=false
+          terraform plan -no-color
