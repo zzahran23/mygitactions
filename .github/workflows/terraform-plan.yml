@@ -23,6 +23,14 @@ jobs:
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Configure AWS Profile
+        shell: bash
+        run: |
+          # Dev
+          aws configure set aws_access_key_id ${{ env.AWS_ACCESS_KEY_ID }} --profile dev
+          aws configure set aws_secret_access_key ${{ env.AWS_SECRET_ACCESS_KEY }} --profile dev
+          aws configure set aws_session_token ${{ env.AWS_SESSION_TOKEN }} --profile dev
+
       - name: Sts GetCallerIdentity
         run: |
           aws sts get-caller-identity
