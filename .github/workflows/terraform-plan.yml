@@ -8,7 +8,7 @@ permissions:
     id-token: write
     contents: read
 jobs:
-  Terraform-Plan:
+  Terraform-Apply:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -23,10 +23,9 @@ jobs:
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Configure AWS Profile
+      - name: Configure AWS Profiles
         shell: bash
         run: |
-          # Dev
           aws configure set aws_access_key_id ${{ env.AWS_ACCESS_KEY_ID }} --profile dev
           aws configure set aws_secret_access_key ${{ env.AWS_SECRET_ACCESS_KEY }} --profile dev
           aws configure set aws_session_token ${{ env.AWS_SESSION_TOKEN }} --profile dev
@@ -39,5 +38,5 @@ jobs:
         with:
           terraform_version: 1.3.9
       - run: terraform init -upgrade
-      - id: plan
-        run: terraform plan -no-color
+      - id: apply
+        run: terraform apply -no-color
