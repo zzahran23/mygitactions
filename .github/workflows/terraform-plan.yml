@@ -1,9 +1,6 @@
 name: Terraform Plan
 run-name: Terraform Plan 🚀
-on: 
-  pull_request:
-    branches:
-      - develop
+on: [push, pull_request]
 env:
   AWS_REGION: "us-east-1"
   AWS_PROFILE: "dev"
