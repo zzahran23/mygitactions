@@ -37,7 +37,8 @@ jobs:
         run: |
           aws sts get-caller-identity
 
-      - uses: hashicorp/setup-terraform@v2
+      - name: Terraform Plan
+        uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.3.9
       - run: |
