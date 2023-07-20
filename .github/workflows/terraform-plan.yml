@@ -16,7 +16,7 @@ defaults:
 env:
   AWS_REGION: "us-east-1"
   AWS_PROFILE: "dev"
-  TF_DIR: ${{ inputs.tf_directory != '' && 'inputs.tf_directory' || '.' }}
+  TF_DIR: ${{ inputs.tf_directory != '' && inputs.tf_directory || '.' }}
 permissions:
     id-token: write
     contents: read
