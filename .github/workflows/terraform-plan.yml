@@ -1,12 +1,22 @@
 name: Terraform Plan
 run-name: Terraform Plan 🚀
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - "main"
+  workflow_dispatch:
+    inputs:
+      tf_directory:
+        description: "Exact location to run Terraform plan"
+        required: true
+        type: string
 defaults:
   run:
     working-directory: .
 env:
   AWS_REGION: "us-east-1"
   AWS_PROFILE: "dev"
+  TF_DIR: ${{ inputs.tf_directory != '' && '${{ inputs.tf_directory }}' || 'envs/zahran-dev/aqua-blue' }}
 permissions:
     id-token: write
     contents: read
@@ -46,7 +56,8 @@ jobs:
         with:
           terraform_version: 1.3.9
       - name: Terraform Plan
-        working-directory: .
+        working-directory: ${{ env.TF_DIR }}
         run: |
+          echo 'tf_directory: ${{ env.TF_DIR }}'
           terraform init -upgrade
           terraform plan -no-color
