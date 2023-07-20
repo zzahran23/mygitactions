@@ -29,9 +29,13 @@ jobs:
       - name: Configure AWS Profiles
         shell: bash
         run: |
-          aws configure set aws_access_key_id ${{ env.AWS_ACCESS_KEY_ID }} --profile dev
-          aws configure set aws_secret_access_key ${{ env.AWS_SECRET_ACCESS_KEY }} --profile dev
-          aws configure set aws_session_token ${{ env.AWS_SESSION_TOKEN }} --profile dev
+          aws configure set role_arn '${{ secrets.AWS_ROLE_DEV }}' --profile dev
+          aws configure set credential_source Environment --profile dev
+          aws configure set region us-east-1 --profile dev
+
+          aws configure set role_arn '${{ secrets.AWS_ROLE_DATA_SHARE }}' --profile data_share
+          aws configure set credential_source Environment --profile data_share
+          aws configure set region us-east-1 --profile data_share
 
       - name: Sts GetCallerIdentity
         run: |
